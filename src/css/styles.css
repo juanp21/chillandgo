@@ -1,0 +1,185 @@
+/* ==========================================================================
+   CHILL&GO — estilos propios
+   Tailwind se carga vía CDN en index.html; este archivo cubre todo lo que
+   Tailwind no resuelve por sí solo: tipografía México 68, patrones, hero,
+   reproductor, ticket de tour, galería duotono, etc.
+   ========================================================================== */
+
+:root{
+  --ink:#131313; --panel:#1B1B1A; --panel2:#212120; --paper:#F3EFE0;
+  --mustard:#E5A93C; --tacos:#E65B2B; --rojo:#D8432E; --nopal:#3E8360; --electric:#4C5FE8; --magenta:#D6217A;
+  --line: rgba(243,239,224,0.14);
+}
+*{ -webkit-tap-highlight-color: transparent; }
+html{ scroll-behavior:smooth; }
+body{
+  background-color: var(--ink);
+  color: var(--paper);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  position:relative;
+}
+
+::selection{ background: var(--tacos); color: var(--ink); }
+
+/* --- Grano de película, sutil, para superficie oscura --- */
+.grain{
+  pointer-events:none; position:fixed; inset:0; z-index:60; opacity:.045; mix-blend-mode:overlay;
+}
+.grain svg{ width:100%; height:100%; }
+
+.hairline{ border-color: var(--line); }
+
+/* --- Divisor tri-lineal: eco del lockup México 68 y de las letras de Mexcellent --- */
+.trilinea{ display:flex; flex-direction:column; gap:3px; width:44px; margin-bottom:16px; }
+.trilinea span{ display:block; height:2px; }
+.trilinea span:nth-child(1){ background:var(--tacos); }
+.trilinea span:nth-child(2){ background:var(--mustard); }
+.trilinea span:nth-child(3){ background:var(--nopal); }
+
+/* --- Patrón de aros radiantes (Wyman), usado como acento, no como relleno --- */
+.rings-68{
+  background-image: repeating-radial-gradient(circle at 50% 50%,
+    var(--_r1,var(--rojo)) 0 6px,
+    var(--_r2,var(--mustard)) 6px 12px,
+    var(--_r3,var(--nopal)) 12px 18px,
+    var(--_r4,#7A1F6B) 18px 24px);
+}
+.rings-68.rings-magenta{ --_r1:#7A1F6B; --_r2:var(--magenta); --_r3:var(--mustard); --_r4:var(--tacos); }
+.rings-68.rings-cool{ --_r1:var(--nopal); --_r2:var(--electric); --_r3:#7A1F6B; --_r4:var(--mustard); }
+.rings-68.rings-warm{ --_r1:var(--rojo); --_r2:var(--tacos); --_r3:var(--mustard); --_r4:#7A1F6B; }
+
+/* --- Título firma: relleno + contorno, referencia directa al lockup México 68 --- */
+.stripe-title{
+  font-family:'Mexcellent','Anton',sans-serif;
+  color: var(--tacos);
+  -webkit-text-stroke: 3px var(--rojo);
+  paint-order: stroke fill;
+  text-shadow: 0 0 60px rgba(216,67,46,.25);
+  letter-spacing: .01em;
+  line-height: .92;
+}
+@media (max-width: 640px){ .stripe-title{ -webkit-text-stroke: 2px var(--rojo); } }
+
+/* --- Hero: fondo / media --- */
+.hero-media{ position:absolute; inset:0; overflow:hidden; }
+.hero-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hero-placeholder{
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 15%, rgba(76,95,232,.25), transparent 60%),
+    linear-gradient(200deg, #0d3b3f 0%, #123b40 32%, #14181c 68%, #0f0f0f 100%);
+}
+.hero-scrim{
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(19,19,19,.55) 0%, rgba(19,19,19,.15) 40%, rgba(19,19,19,.45) 100%);
+}
+
+/* --- Nav: transparente sobre el hero, sólido al hacer scroll --- */
+#site-nav{ transition: background-color .3s ease, border-color .3s ease, backdrop-filter .3s ease; }
+#site-nav.scrolled{ background-color: rgba(19,19,19,.88); backdrop-filter: blur(10px); border-color: var(--line); }
+
+/* --- Botones --- */
+.btn-outline{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--line); padding:10px 20px;
+  font-weight:600; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase;
+  transition: border-color .25s ease, background-color .25s ease, color .25s ease;
+}
+.btn-outline:hover{ border-color: currentColor; }
+.btn-solid{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 22px; font-weight:700; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase;
+  transition: filter .2s ease, transform .2s ease;
+}
+.btn-solid:hover{ filter:brightness(1.12); }
+
+/* --- Waveform --- */
+.bar{ width:3px; background:var(--paper); border-radius:2px; animation: bounce 1.1s ease-in-out infinite; }
+@keyframes bounce{ 0%,100%{ transform:scaleY(.3); } 50%{ transform:scaleY(1); } }
+
+/* --- Cassette (elemento firma discreto, no usado en el hero actual) --- */
+.reel{ animation: spin 4s linear infinite; transform-origin:center; animation-play-state: paused; }
+.reel.slow{ animation-duration: 4.6s; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.cassette-wrap.playing .reel{ animation-play-state: running; }
+
+/* --- Perforación de boleto (fechas de tour) --- */
+.ticket-hole{
+  position:absolute; top:50%; width:20px; height:20px; border-radius:50%;
+  background: var(--panel2); transform:translateY(-50%);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.ticket-perf{
+  background-image: repeating-linear-gradient(to bottom, transparent 0 6px, var(--line) 6px 8px);
+  width:1px;
+}
+
+/* --- Lanzamientos: galería duotono --- */
+.rel-tile{ position:relative; overflow:hidden; display:block; border:1px solid var(--line); cursor:pointer; }
+.rel-tile .rel-art{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition: transform .6s cubic-bezier(.16,1,.3,1), opacity .45s ease;
+  opacity:.45;
+}
+.rel-tile:hover .rel-art, .rel-tile:focus-visible .rel-art{ transform: scale(1.06); opacity:1; }
+.rel-tile .rel-caption{
+  position:absolute; inset:0; display:flex; align-items:flex-end; padding:16px;
+  background: linear-gradient(to top, rgba(10,10,10,.85), transparent 55%);
+}
+.rel-tile .rel-title{
+  font-family:'Mexcellent','Anton',sans-serif; color:var(--paper);
+  font-size: clamp(1.05rem, 2.4vw, 2rem);
+  letter-spacing:.02em;
+  transform: translateY(6px); opacity:.9; transition: transform .35s ease, opacity .35s ease;
+}
+.rel-tile:hover .rel-title{ transform: translateY(0); opacity:1; }
+.rel-tile .rel-meta{
+  position:absolute; top:14px; left:14px; font-weight:700; font-size:10px; letter-spacing:.1em;
+  color:var(--ink); background:var(--paper); padding:3px 8px;
+}
+.rel-tile .rel-play{
+  position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:9999px;
+  background:var(--paper); color:var(--ink); border:none; display:flex; align-items:center; justify-content:center;
+  font-size:13px; z-index:2;
+}
+
+/* --- Posters (Galería) --- */
+.poster-media{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.poster-tag{
+  display:inline-block; font-weight:700; font-size:10px; letter-spacing:.08em;
+  background: rgba(19,19,19,.65); backdrop-filter: blur(4px); color:var(--paper);
+  border:1px solid var(--line); padding:3px 9px; width:fit-content;
+}
+.poster-title{
+  font-family:'Mexcellent','Anton',sans-serif; font-size:1.15rem; line-height:1.15;
+  background: rgba(19,19,19,.65); backdrop-filter: blur(4px); color:var(--paper);
+  border:1px solid var(--line); padding:6px 10px; width:fit-content;
+}
+
+/* --- Merch: tarjetas de producto --- */
+.merch-card{ background: var(--panel); transition: border-color .25s ease, transform .3s ease; }
+.merch-card:hover{ border-color: rgba(243,239,224,.4); transform: translateY(-3px); }
+.merch-art{
+  transition: transform .5s cubic-bezier(.16,1,.3,1), filter .4s ease;
+  filter: saturate(.85) brightness(.85);
+}
+.merch-card:hover .merch-art{ transform: scale(1.06); filter: saturate(1) brightness(1); }
+
+/* --- Marquee (si se usa en alguna franja) --- */
+.marquee-track{ display:flex; width:max-content; animation: marquee 30s linear infinite; }
+@keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* focus visibility */
+a:focus-visible, button:focus-visible{ outline: 2px solid var(--electric); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* mobile menu overlay */
+#mobile-menu{ transition: opacity .3s ease, visibility .3s ease; }
+#mobile-menu.closed{ opacity:0; visibility:hidden; }
+
+/* mini player slide */
+#mini-player{ transition: transform .35s cubic-bezier(.16,1,.3,1); }
+#mini-player.hidden-player{ transform: translateY(140%); }
