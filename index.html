@@ -42,30 +42,45 @@
     <a href="#top" class="font-display text-base md:text-lg tracking-wide">CHILL&amp;GO</a>
 
     <nav class="hidden md:flex items-center gap-8 font-metro text-[0.625rem] uppercase tracking-[0.15em] text-paper/80">
-      <a href="#top" class="hover:text-paper transition-colors">Inicio</a>
-      <a href="#musica" class="hover:text-paper transition-colors">Lanzamientos</a>
-      <a href="#tour" class="hover:text-paper transition-colors">Tour</a>
-      <a href="#merch" class="hover:text-paper transition-colors">Merch</a>
-      <a href="#prensa" class="hover:text-paper transition-colors">Prensa</a>
-      <a href="#contacto" class="hover:text-paper transition-colors">Contacto</a>
+      <a href="#top" class="hover:text-paper transition-colors" data-i18n="nav.home">Inicio</a>
+      <a href="#musica" class="hover:text-paper transition-colors" data-i18n="nav.music">Lanzamientos</a>
+      <a href="#tour" class="hover:text-paper transition-colors" data-i18n="nav.tour">Tour</a>
+      <a href="#merch" class="hover:text-paper transition-colors" data-i18n="nav.merch">Merch</a>
+      <a href="#prensa" class="hover:text-paper transition-colors" data-i18n="nav.press">Prensa</a>
+      <a href="#contacto" class="hover:text-paper transition-colors" data-i18n="nav.contact">Contacto</a>
     </nav>
 
-    <button id="menu-btn" aria-label="Abrir menú" aria-expanded="false" class="md:hidden p-2">
-      <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-      <svg id="menu-icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
-    </button>
+    <div class="flex items-center gap-2">
+      <div class="lang-switcher relative">
+        <button id="lang-toggle" type="button" class="lang-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Seleccionar idioma">
+          <span id="lang-current">ES</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="lang-menu" class="lang-menu hidden" role="menu">
+          <button type="button" class="lang-option" data-lang="es" role="menuitem">ES</button>
+          <button type="button" class="lang-option" data-lang="en" role="menuitem">EN</button>
+          <button type="button" class="lang-option" data-lang="fr" role="menuitem">FR</button>
+          <button type="button" class="lang-option" data-lang="de" role="menuitem">DE</button>
+        </div>
+      </div>
+
+      <button id="menu-btn" aria-label="Abrir menú" aria-expanded="false" class="md:hidden p-2">
+        <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg id="menu-icon-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- menú móvil a pantalla completa -->
 <div id="mobile-menu" class="closed fixed inset-0 z-40 bg-ink flex flex-col items-center justify-center gap-8 md:hidden">
-  <a href="#top" class="menu-link font-display text-3xl">Inicio</a>
-  <a href="#musica" class="menu-link font-display text-3xl">Lanzamientos</a>
-  <a href="#tour" class="menu-link font-display text-3xl">Tour</a>
-  <a href="#galeria" class="menu-link font-display text-3xl">Galería</a>
-  <a href="#merch" class="menu-link font-display text-3xl">Merch</a>
-  <a href="#prensa" class="menu-link font-display text-3xl">Prensa</a>
-  <a href="#contacto" class="menu-link font-display text-3xl">Contacto</a>
+  <a href="#top" class="menu-link font-display text-3xl" data-i18n="nav.home">Inicio</a>
+  <a href="#musica" class="menu-link font-display text-3xl" data-i18n="nav.music">Lanzamientos</a>
+  <a href="#tour" class="menu-link font-display text-3xl" data-i18n="nav.tour">Tour</a>
+  <a href="#galeria" class="menu-link font-display text-3xl" data-i18n="nav.gallery">Galería</a>
+  <a href="#merch" class="menu-link font-display text-3xl" data-i18n="nav.merch">Merch</a>
+  <a href="#prensa" class="menu-link font-display text-3xl" data-i18n="nav.press">Prensa</a>
+  <a href="#contacto" class="menu-link font-display text-3xl" data-i18n="nav.contact">Contacto</a>
 </div>
 
 <!-- ============ HERO — solo foto/video + "CHILL&GO" centrado ============ -->
@@ -96,14 +111,14 @@
 <section id="bio" class="border-y hairline">
   <div class="max-w-3xl mx-auto px-5 md:px-8 py-14 md:py-16 text-center">
     <div class="trilinea mx-auto"><span></span><span></span><span></span></div>
-    <p class="text-base md:text-lg text-paper/80 leading-relaxed">
+    <p class="text-base md:text-lg text-paper/80 leading-relaxed" data-i18n="bio.copy" data-i18n-html="true">
       Chill&amp;Go es el proyecto de <strong class="text-paper">Juan Torres</strong>, productor y multiinstrumentista
       de la Ciudad de México. Su música mezcla ritmos latinos, lofi y sonidos cotidianas de la CDMX. Realizo el Takeover de la playlist
       "Lofi Mexa" en Spotify, y su música ha acompañado campañas globales de Nike y producciones de cine mexicano.
     </p>
     <div class="flex justify-center gap-3 mt-8">
-      <a href="https://linktr.ee/chillngo_" target="_blank" rel="noopener" class="btn-solid bg-paper text-ink">Escuchalo ahora</a>
-      <a href="#tour" class="btn-outline text-paper">Ver Tour</a>
+      <a href="https://linktr.ee/chillngo_" target="_blank" rel="noopener" class="btn-solid bg-paper text-ink" data-i18n="bio.listenNow">Escuchalo ahora</a>
+      <a href="#tour" class="btn-outline text-paper" data-i18n="bio.viewTour">Ver Tour</a>
     </div>
   </div>
 </section>
@@ -113,9 +128,9 @@
   <div class="flex items-end justify-between mb-10 flex-wrap gap-3">
     <div>
       <div class="trilinea"><span></span><span></span><span></span></div>
-      <h2 class="font-display text-3xl sm:text-4xl">Lanzamientos</h2>
+      <h2 class="font-display text-3xl sm:text-4xl" data-i18n="releases.title">Lanzamientos</h2>
     </div>
-    <a href="https://ffm.to/chillandgo" target="_blank" rel="noopener" class="text-sm font-semibold text-paper/70 hover:text-paper underline decoration-tacos decoration-2 underline-offset-4">Ver discografía completa →</a>
+    <a href="https://ffm.to/chillandgo" target="_blank" rel="noopener" class="text-sm font-semibold text-paper/70 hover:text-paper underline decoration-tacos decoration-2 underline-offset-4" data-i18n="releases.viewAll">Ver discografía completa →</a>
   </div>
 
   <div class="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[170px] gap-3 md:gap-4 grid-flow-dense">
@@ -124,24 +139,24 @@
       <video class="rel-art" autoplay muted loop playsinline preload="metadata">
         <source src="src/assets/images/releases/cover-01.mp4" type="video/mp4">
       </video>
-      <span class="rel-meta">NUEVO ALBUM</span>
-      <div class="rel-caption"><span class="rel-title">Tengo que ir<br>a terapia</span></div>
+      <span class="rel-meta" data-i18n="releases.item1.meta">NUEVO ALBUM</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item1.title" data-i18n-html="true">Tengo que ir<br>a terapia</span></div>
     </a>
 
     <a href="https://www.youtube.com/watch?v=_smhGGpKVnw&list=PLJhOu4FG4cJc" target="_blank" rel="noopener" class="rel-tile col-span-1 row-span-2 aspect-[4/5]">
       <video class="rel-art" autoplay muted loop playsinline preload="metadata">
         <source src="src/assets/images/releases/cover-02.mp4" type="video/mp4">
       </video>
-      <span class="rel-meta">ALBUM</span>
-      <div class="rel-caption"><span class="rel-title">El Patio 1 & 2</span></div>
+      <span class="rel-meta" data-i18n="releases.item2.meta">ALBUM</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item2.title">El Patio 1 & 2</span></div>
     </a>
 
     <a href="https://www.youtube.com/watch?v=1Y_HL12DPSA" target="_blank" rel="noopener" class="rel-tile col-span-1 row-span-1">
       <video class="rel-art" autoplay muted loop playsinline preload="metadata">
         <source src="src/assets/images/releases/cover-03.mp4" type="video/mp4">
       </video>
-      <span class="rel-meta">ALBUM</span>
-      <div class="rel-caption"><span class="rel-title">El Mercado</span></div>
+      <span class="rel-meta" data-i18n="releases.item3.meta">ALBUM</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item3.title">El Mercado</span></div>
     </a>
 
     <!-- <a href="https://open.spotify.com/intl-es/artist/6EE1OjZRlv4jJJ1bUUvp5h" target="_blank" rel="noopener" class="rel-tile col-span-1 row-span-2 aspect-[4/5]">
@@ -154,20 +169,20 @@
 
     <a href="https://ffm.to/mdqr" target="_blank" rel="noopener" class="rel-tile col-span-1 row-span-2 aspect-[4/5]">
       <img class="rel-art" src="src/assets/images/releases/cover-04.png" alt="MDQR">
-      <span class="rel-meta">NUEVO SINGLE</span>
-      <div class="rel-caption"><span class="rel-title">ME DUELE QUE ROMPIMOS</span></div>
+      <span class="rel-meta" data-i18n="releases.item4.meta">NUEVO SINGLE</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item4.title">ME DUELE QUE ROMPIMOS</span></div>
     </a>
 
     <a href="https://www.youtube.com/watch?v=tzzlUWcZ0Pg&list=RDtzzlUWcZ0Pg" target="_blank" rel="noopener" class="rel-tile col-span-2 row-span-1">
       <img class="rel-art" src="src/assets/images/releases/cover-05.jpg" alt="Mexsynthco Live Set">
-      <span class="rel-meta">LOFI MEXA LIVE SET</span>
-      <div class="rel-caption"><span class="rel-title">MEXSYNTHCO LIVE SET</span></div>
+      <span class="rel-meta" data-i18n="releases.item5.meta">LOFI MEXA LIVE SET</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item5.title">MEXSYNTHCO LIVE SET</span></div>
     </a>
 
     <a href="https://lnk.dmsmusic.co/chillgo_autorretrato" target="_blank" rel="noopener" class="rel-tile col-span-1 row-span-1">
       <img class="rel-art" src="src/assets/images/releases/cover-06.jpg" alt="Autorretrato">
-      <span class="rel-meta">ALBUM</span>
-      <div class="rel-caption"><span class="rel-title">Autorretrato</span></div>
+      <span class="rel-meta" data-i18n="releases.item6.meta">ALBUM</span>
+      <div class="rel-caption"><span class="rel-title" data-i18n="releases.item6.title">Autorretrato</span></div>
     </a>
   </div>
 
@@ -177,16 +192,16 @@
 <section id="tour" class="border-y hairline bg-panel py-20 md:py-28">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="trilinea"><span></span><span></span><span></span></div>
-    <h2 class="font-display text-2xl sm:text-3xl mb-10">Próximas Fechas</h2>
+    <h2 class="font-display text-2xl sm:text-3xl mb-10" data-i18n="tour.title">Próximas Fechas</h2>
       
       <div class="grid gap-3">
       <div class="tour-ticket relative grid grid-cols-[1fr,auto] items-stretch bg-panel2 border hairline">
         <div class="ticket-hole" style="left:calc(78% - 10px)"></div>
         <div class="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8">
-          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0">21 de Agosto</span>
+          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0" data-i18n="tour.date1">21 de Agosto</span>
           <div>
-            <p class="font-semibold">La Saturnalia (con RNDN)</p>
-            <p class="text-sm text-paper/50">CDMX | IMLOFI Presenta.</p>
+            <p class="font-semibold" data-i18n="tour.venue1">La Saturnalia (con RNDN)</p>
+            <p class="text-sm text-paper/50" data-i18n="tour.loc1">CDMX | IMLOFI Presenta.</p>
           </div>
         </div>
         <div class="relative flex items-center justify-center px-6 py-4 sm:py-0" style="width:clamp(120px,22%,180px)">
@@ -199,10 +214,10 @@
       <div class="tour-ticket relative grid grid-cols-[1fr,auto] items-stretch bg-panel2 border hairline">
         <div class="ticket-hole" style="left:calc(78% - 10px)"></div>
         <div class="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8">
-          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0">4 de Septiembre</span>
+          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0" data-i18n="tour.date2">4 de Septiembre</span>
           <div>
-            <p class="font-semibold">CCH Sur</p>
-            <p class="text-sm text-paper/50">CDMX.</p>
+            <p class="font-semibold" data-i18n="tour.venue2">CCH Sur</p>
+            <p class="text-sm text-paper/50" data-i18n="tour.loc2">CDMX.</p>
           </div>
         </div>
         
@@ -215,10 +230,10 @@
       <div class="tour-ticket relative grid grid-cols-[1fr,auto] items-stretch bg-panel2 border hairline">
         <div class="ticket-hole" style="left:calc(78% - 10px)"></div>
         <div class="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8">
-          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0">10 de Septiembre</span>
+          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0" data-i18n="tour.date3">10 de Septiembre</span>
           <div>
-            <p class="font-semibold">Outline (con RNDN)</p>
-            <p class="text-sm text-paper/50">CDMX | IMLOFI Presenta.</p>
+            <p class="font-semibold" data-i18n="tour.venue3">Outline (con RNDN)</p>
+            <p class="text-sm text-paper/50" data-i18n="tour.loc3">CDMX | IMLOFI Presenta.</p>
           </div>
         </div>
         <div class="relative flex items-center justify-center px-6 py-4 sm:py-0" style="width:clamp(120px,22%,180px)">
@@ -230,10 +245,10 @@
       <div class="tour-ticket relative grid grid-cols-[1fr,auto] items-stretch bg-panel2 border hairline">
         <div class="ticket-hole" style="left:calc(78% - 10px)"></div>
         <div class="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8">
-          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0">Nov 2026</span>
+          <span class="font-bold uppercase tracking-wide text-tacos text-xs w-24 shrink-0" data-i18n="tour.date4">Nov 2026</span>
           <div>
-            <p class="font-semibold">Festival Internacional del Globo</p>
-            <p class="text-sm text-paper/50">León, Gto.</p>
+            <p class="font-semibold" data-i18n="tour.venue4">Festival Internacional del Globo</p>
+            <p class="text-sm text-paper/50" data-i18n="tour.loc4">León, Gto.</p>
           </div>
         </div>
         <div class="relative flex items-center justify-center px-6 py-4 sm:py-0" style="width:clamp(120px,22%,180px)">
@@ -274,8 +289,8 @@
 <!-- ============ GALERÍA ============ -->
 <section id="galeria" class="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28">
   <div class="trilinea"><span></span><span></span><span></span></div>
-  <h2 class="font-display text-2xl sm:text-3xl mb-2">Flyers</h2>
-  <p class="text-paper/60 max-w-lg mb-10">Identidad gráfica hecha en colaboración con ilustradoras mexicanas.</p>
+  <h2 class="font-display text-2xl sm:text-3xl mb-2" data-i18n="gallery.title">Flyers</h2>
+  <p class="text-paper/60 max-w-lg mb-10" data-i18n="gallery.subtitle">Identidad gráfica hecha en colaboración con ilustradoras mexicanas.</p>
 
   <div class="columns-2 md:columns-3 gap-4 [column-fill:balance]">
     <div class="relative mb-4 break-inside-avoid border hairline aspect-[3/4] overflow-hidden">
@@ -322,7 +337,7 @@
   <div class="flex items-end justify-between mb-10 flex-wrap gap-3">
     <div>
       <div class="trilinea"><span></span><span></span><span></span></div>
-      <h2 class="font-display text-2xl sm:text-3xl">Merch</h2>
+      <h2 class="font-display text-2xl sm:text-3xl" data-i18n="merch.title">Merch</h2>
     </div>
     
   </div>
@@ -389,18 +404,18 @@
 <section id="prensa" class="border-y hairline bg-panel py-20 md:py-28">
   <div class="max-w-7xl mx-auto px-5 md:px-8">
     <div class="trilinea"><span></span><span></span><span></span></div>
-    <h2 class="font-display text-2xl sm:text-3xl mb-10">Prensa, Syncs &amp; Hitos</h2>
+    <h2 class="font-display text-2xl sm:text-3xl mb-10" data-i18n="prensa.title">Prensa, Syncs &amp; Hitos</h2>
 
     <div class="grid sm:grid-cols-3 gap-px bg-line">
       <div class="bg-panel p-6">
-        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4">Syncs / Cine</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4" data-i18n="prensa.syncs">Syncs / Cine</p>
         <ul class="space-y-3 text-sm">
           <li>Mood Media x Nike Retail <span class="block text-xs text-paper/50">miel + amor & Tengo que ir a terapia</span> </li>
           <li><a href="https://open.spotify.com/playlist/0uX9UYLw0hiIJCw0cktPJY" class="text-tacos hover:underline">Déjame estar contigo | Soundtrack</a>
         </ul> <span class="block text-xs text-paper/50">Autorretrato</span></li> 
       </div>
       <div class="bg-panel p-6">
-        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4">Prensa</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4" data-i18n="prensa.press">Prensa</p>
         <ul class="space-y-2 text-sm">
           <li><a href="https://www.indierocks.mx/musica/noticias/tengo-que-ir-a-terapia-lo-nuevo-de-chillgo-en-colaboracion-con-jayani/" class="text-tacos hover:underline" target="_blank">Indie Rocks! Magazine</a></li>
           <li>Playlist Magazine</li>
@@ -408,7 +423,7 @@
         </ul>
       </div>
       <div class="bg-panel p-6">
-        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4">Aperturas</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-tacos mb-4" data-i18n="prensa.openings">Aperturas</p>
         <ul class="space-y-2 text-sm">
           <li>Amandititita (MX)</li><li>Cosmic Wacho (AR/ES)</li><li>H 3 F (TH)</li>
         </ul>
@@ -417,10 +432,10 @@
 
     <div class="mt-4 border hairline p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <p class="font-display text-lg">EPK 2026</p>
-        <p class="text-sm text-paper/60">Biografía y rider técnico.</p>
+        <p class="font-display text-lg" data-i18n="prensa.epkTitle">EPK 2026</p>
+        <p class="text-sm text-paper/60" data-i18n="prensa.epkText">Biografía y rider técnico.</p>
       </div>
-      <a href="https://drive.google.com/file/d/1easD1xPgXFPa1gN-Hs7ZvVx1ase3WtX8d" class="btn-solid bg-mustard text-ink shrink-0">Descargar EPK (PDF)</a>
+      <a href="https://drive.google.com/file/d/1easD1xPgXFPa1gN-Hs7ZvVx1ase3WtX8d" class="btn-solid bg-mustard text-ink shrink-0" data-i18n="prensa.downloadEpk">Descargar EPK (PDF)</a>
     </div>
   </div>
 </section>
@@ -432,14 +447,14 @@
   <div class="grid md:grid-cols-[1.2fr,1fr] gap-12 relative">
     <div>
       <div class="trilinea"><span></span><span></span><span></span></div>
-      <h2 class="font-display text-2xl sm:text-3xl mb-4">Booking &amp; Contacto</h2>
-      <p class="text-paper/60 max-w-md mb-6">Para fechas y prensa.</p>
+      <h2 class="font-display text-2xl sm:text-3xl mb-4" data-i18n="footer.bookingTitle">Booking &amp; Contacto</h2>
+      <p class="text-paper/60 max-w-md mb-6" data-i18n="footer.bookingText">Para fechas y prensa.</p>
       <a href="mailto:rotoentertaimentmx@gmail.com" class="inline-flex items-center gap-2 font-semibold text-lg border-b border-tacos pb-1">
         rotoentertaimentmx@gmail.com
       </a>
       <p class="text-sm text-paper/50 mt-2">Roto Entertainment · Booking Agency</p>
 
-      <p class="text-paper/60 max-w-md mb-6">Para sincronizaciones y licencias.</p>
+      <p class="text-paper/60 max-w-md mb-6" data-i18n="footer.syncText">Para sincronizaciones y licencias.</p>
       <a href="mailto:rotoentertaimentmx@gmail.com" class="inline-flex items-center gap-2 font-semibold text-lg border-b border-tacos pb-1">
         ajvscomx@gmail.com
       </a>
@@ -476,8 +491,8 @@
   </div>
 
   <div class="border-t hairline mt-14 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-paper/40">
-    <p>© 2026 Chill&amp;Go.</p>
-    <p>Hecho en el DF.</p>
+    <p data-i18n="footer.copyright">© 2026 Chill&amp;Go.</p>
+    <p data-i18n="footer.madeIn">Hecho en el DF.</p>
   </div>
 </footer>
 
