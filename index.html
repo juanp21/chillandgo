@@ -86,8 +86,10 @@
 <!-- ============ HERO — solo foto/video + "CHILL&GO" centrado ============ -->
 <section id="top" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
   <div class="hero-media" aria-hidden="true">
-    
+    <picture>
+      <source media="(max-width: 767px)" srcset="src/assets/images/hero/hero-phone.png">
       <img src="src/assets/images/hero/hero-photo.png" class="hero-photo" alt="Chill&Go">
+    </picture>
 
     <!--   Opción B — Video (se recomienda .mp4, <15MB, sin audio o muteado):
       <video class="hero-photo" autoplay muted loop playsinline poster="src/assets/images/hero/hero-photo.jpg">
