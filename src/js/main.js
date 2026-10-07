@@ -236,7 +236,7 @@ const translations = {
     'tour.venue3': 'Outline (mit RNDN)',
     'tour.loc3': 'CDMX | IMLOFI präsentiert.',
     'tour.status3': 'Freier Eintritt',
-    'tour.date4': '16. September',
+    'tour.date4': '16. Oktober',
     'tour.venue4': 'Cinco Pies',
     'tour.loc4': 'CDMX | Full Band.',
     'tour.date5': '15. November',
