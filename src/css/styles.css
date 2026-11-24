@@ -232,7 +232,7 @@ a:focus-visible, button:focus-visible{ outline: 2px solid var(--electric); outli
 /* --- Escritorio: SVG --- */
 .metro-map{
   display:block; width:100%; height:auto; max-width:1400px;
-  max-height: calc(100svh - 11rem); overflow:visible;
+  max-height: calc(100svh - 7rem); overflow:visible;
 }
 .metro-line{ transition: opacity .35s ease; }
 .metro-line-casing, .metro-line-stroke{
@@ -398,18 +398,6 @@ a:focus-visible, button:focus-visible{ outline: 2px solid var(--electric); outli
   transition: top .45s cubic-bezier(.65,0,.35,1), opacity .25s ease;
 }
 .metro-strip-train.is-on{ opacity:1; }
-
-/* --- Leyenda --- */
-.metro-legend{
-  background: rgba(19,19,19,.88);
-  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
-  color: rgba(243,239,224,.75);
-}
-.metro-legend-item{ display:inline-flex; align-items:center; gap:8px; }
-.metro-sym{ display:inline-block; flex-shrink:0; }
-.metro-sym-xfer{ width:14px; height:14px; border-radius:50%; background: var(--paper); border:3px solid var(--ink); box-shadow: 0 0 0 1.5px var(--paper); }
-.metro-sym-visited{ width:13px; height:13px; border-radius:50%; background: var(--metro-verde); border:3px solid var(--metro-verde); }
-.metro-sym-obra{ width:26px; height:0; border-top:3px dotted rgba(243,239,224,.45); }
 
 @media (prefers-reduced-motion: reduce){
   .metro-line-casing, .metro-line-stroke, .metro-strip-train{ transition:none !important; }

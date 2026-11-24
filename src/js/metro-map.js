@@ -450,12 +450,6 @@
   if (svg) setupDesktopInteractions(buildDesktopMap(svg));
   if (strips) buildStrips(strips);
 
-  // Leyenda: mismos números/colores que el mapa
-  document.querySelectorAll('[data-metro-legend-lines]').forEach((wrap) => {
-    wrap.innerHTML = METRO_LINES.map((l) =>
-      `<span class="metro-legend-item"><span class="metro-badge" style="--c:${l.color};--ci:${l.ink}">${l.num}</span><span data-i18n="${l.nameKey}">${l.name}</span></span>`).join('');
-  });
-
   // Una sección cuenta como "visitada" cuando se ve en pantalla
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
