@@ -22,7 +22,7 @@
       id: 'l1', num: '1', color: 'var(--metro-verde)', ink: 'var(--paper)',
       nameKey: 'metro.l1', name: 'Línea Verde · Música',
       path: 'M120 150 H170 L270 250 H910 L1010 150',
-      stations: ['musica', 'tour'],
+      stations: ['musica', 'spotify', 'tour'],
     },
     {
       id: 'l2', num: '2', color: 'var(--rojo)', ink: 'var(--paper)',
@@ -45,6 +45,9 @@
   //        'E' = pictograma a la derecha con el nombre debajo
   const METRO_STATIONS = {
     musica:   { href: '#musica',   key: 'nav.music',   name: 'Lanzamientos', icon: 'music',  x: 120,  y: 150, label: 'n' },
+    // external: abre un enlace fuera del sitio (nueva pestaña) en lugar de hacer scroll
+    spotify:  { href: 'https://open.spotify.com/artist/6EE1OjZRlv4jJJ1bUUvp5h', external: true,
+                key: 'metro.music', name: 'Música', icon: 'phones', x: 220, y: 200, label: 's' },
     tour:     { href: '#tour',     key: 'nav.tour',    name: 'Tour',         icon: 'ticket', x: 1010, y: 150, label: 'e' },
     galeria:  { href: '#galeria',  key: 'gallery.title', name: 'Flyers',     icon: 'poster', x: 120,  y: 570, label: 's' },
     fotos:    { href: '#fotos',    key: 'nav.photos',  name: 'Fotos',        icon: 'camera', x: 330,  y: 570, label: 's' },
@@ -55,6 +58,7 @@
 
   // Pictogramas propios (24x24, solo trazo)
   const ICONS = {
+    phones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4.5" height="7" rx="1.5"/><rect x="16.5" y="14" width="4.5" height="7" rx="1.5"/>',
     music:  '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 5.5a6.5 6.5 0 0 1 6.5 6.5"/>',
     ticket: '<path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M15 7v10" stroke-dasharray="2 2"/>',
     poster: '<rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M9 17h6"/>',
@@ -151,6 +155,7 @@
       const isXfer = lines.length > 1;
       const main = lines[0];
       const a = el('a', { href: st.href, class: `metro-station${isXfer ? ' is-xfer' : ''}`, 'data-station': id }, gStations);
+      if (st.external) { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); }
       a.style.setProperty('--c', main.color);
       a.style.setProperty('--ci', main.ink);
 
@@ -332,14 +337,17 @@
       a.addEventListener('click', (e) => {
         const id = a.dataset.station;
         const st = METRO_STATIONS[id];
-        const target = document.querySelector(st.href);
-        if (!target) return;
+        const target = st.external ? null : document.querySelector(st.href);
+        if (!st.external && !target) return;
         e.preventDefault();
 
         const go = () => {
           markVisited(id);
-          history.pushState(null, '', st.href);
-          target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+          if (st.external) window.open(st.href, '_blank', 'noopener');
+          else {
+            history.pushState(null, '', st.href);
+            target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+          }
           scheduleIdle(9000);
         };
         if (reduceMotion) { go(); return; }
@@ -398,7 +406,7 @@
           `<span class="metro-badge" style="--c:${l.color};--ci:${l.ink}">${l.num}</span>`).join('');
         return `
           <li>
-            <a href="${st.href}" class="metro-stop${others.length ? ' is-xfer' : ''}" data-station="${id}">
+            <a href="${st.href}" class="metro-stop${others.length ? ' is-xfer' : ''}" data-station="${id}"${st.external ? ' target="_blank" rel="noopener"' : ''}>
               <span class="metro-stop-node"></span>
               <span class="metro-stop-tile">${iconSVG(st.icon, line.ink)}</span>
               <span class="metro-stop-name" data-i18n="${st.key}">${st.name}</span>
@@ -422,6 +430,7 @@
     container.querySelectorAll('.metro-stop').forEach((a) => {
       a.addEventListener('click', (e) => {
         const id = a.dataset.station;
+        if (METRO_STATIONS[id].external) { markVisited(id); return; } // el enlace abre solo (nueva pestaña)
         const target = document.querySelector(METRO_STATIONS[id].href);
         if (!target) return;
         e.preventDefault();
@@ -461,6 +470,7 @@
       });
     }, { threshold: 0.35 });
     Object.values(METRO_STATIONS).forEach((st) => {
+      if (st.external) return;
       const t = document.querySelector(st.href);
       if (t) io.observe(t);
     });
