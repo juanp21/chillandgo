@@ -84,28 +84,40 @@
   <a href="#contacto" class="menu-link font-display text-3xl" data-i18n="nav.contact">Contacto</a>
 </div>
 
-<!-- ============ HERO — solo foto/video + "CHILL&GO" centrado ============ -->
-<section id="top" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
-  <div class="hero-media" aria-hidden="true">
-    
-      <img src="src/assets/images/hero/hero-photo.png" class="hero-photo" alt="Chill&Go">
+<!-- ============ HERO — RED DE TRANSPORTE CHILL&GO (mapa interactivo) ============
+     El mapa se genera desde src/js/metro-map.js (líneas, estaciones y posiciones).
+     Escritorio (lg+): mapa SVG. Móvil/tablet: diagramas de recorrido verticales. -->
+<section id="top" class="metro-hero relative min-h-[100svh] flex flex-col pt-16 md:pt-20 overflow-hidden">
+  <div class="metro-grid" aria-hidden="true"></div>
+  <h1 class="sr-only">CHILL&amp;GO</h1>
 
-    <!--   Opción B — Video (se recomienda .mp4, <15MB, sin audio o muteado):
-      <video class="hero-photo" autoplay muted loop playsinline poster="src/assets/images/hero/hero-photo.jpg">
-        <source src="src/assets/video/hero/hero-video.mp4" type="video/mp4">
-      </video>
- -->
-      Mientras no exista ninguno de los dos archivos, se muestra este placeholder:
-    -->
-    <!-- <div class="hero-photo hero-placeholder"></div> -->
+  <!-- Escritorio -->
+  <nav class="hidden lg:flex relative flex-1 min-h-0 items-center justify-center px-6 py-4" aria-label="Mapa Chill&amp;Go">
+    <svg id="metro-map" class="metro-map" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg"></svg>
+  </nav>
 
-    <div class=" opacity-[0.16] pointer-events-none"></div>
-    <div class="hero-scrim"></div>
+  <!-- Móvil / tablet -->
+  <nav class="lg:hidden relative px-5 pt-6 pb-12" aria-label="Mapa Chill&amp;Go">
+    <a href="#bio" class="metro-hub-m">
+      <img src="src/assets/images/hero/hero-photo.png" alt="Chill&amp;Go">
+      <span class="metro-hub-m-pill" data-i18n="nav.home">Inicio</span>
+    </a>
+    <p class="metro-kicker" data-i18n="metro.hint">Elige una estación</p>
+    <div id="metro-strips" class="metro-strips"></div>
+  </nav>
+
+  <!-- Leyenda / simbología -->
+  <div class="metro-legend relative border-t hairline hidden lg:block">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 py-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+      <p class="text-paper/45" data-i18n="metro.hint">Elige una estación</p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <div class="flex items-center gap-4" data-metro-legend-lines></div>
+        <span class="metro-legend-item"><span class="metro-sym metro-sym-xfer"></span><span data-i18n="metro.xfer">Correspondencia</span></span>
+        <span class="metro-legend-item"><span class="metro-sym metro-sym-visited"></span><span data-i18n="metro.visited">Visitada</span></span>
+        <span class="metro-legend-item"><span class="metro-sym metro-sym-obra"></span><span data-i18n="metro.obra">En obra</span></span>
+      </div>
+    </div>
   </div>
-
-  <!-- <h1 class="stripe-title relative text-[4rem] sm:text-8xl md:text-[10rem] text-center px-5">
-    CHILL&amp;GO
-  </h1> -->
 </section>
 
 <!-- ============ BIO ============ -->
@@ -535,6 +547,7 @@
 </footer>
 
 <!-- Lógica del sitio -->
+<script src="src/js/metro-map.js"></script>
 <script src="src/js/main.js"></script>
 </body>
 </html>

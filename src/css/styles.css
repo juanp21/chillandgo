@@ -214,3 +214,203 @@ a:focus-visible, button:focus-visible{ outline: 2px solid var(--electric); outli
 /* mini player slide */
 #mini-player{ transition: transform .35s cubic-bezier(.16,1,.3,1); }
 #mini-player.hidden-player{ transform: translateY(140%); }
+
+/* ==========================================================================
+   RED DE TRANSPORTE CHILL&GO — mapa del hero (ver src/js/metro-map.js)
+   ========================================================================== */
+:root{ --metro-verde:#3F9A4A; }
+
+.metro-hero{ background: var(--ink); }
+.metro-grid{
+  position:absolute; inset:0; pointer-events:none;
+  background-image: radial-gradient(rgba(243,239,224,.08) 1px, transparent 1.3px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 80%);
+          mask-image: radial-gradient(ellipse at center, #000 35%, transparent 80%);
+}
+
+/* --- Escritorio: SVG --- */
+.metro-map{
+  display:block; width:100%; height:auto; max-width:1400px;
+  max-height: calc(100svh - 11rem); overflow:visible;
+}
+.metro-line{ transition: opacity .35s ease; }
+.metro-line-casing, .metro-line-stroke{
+  fill:none; stroke-linecap:round; stroke-linejoin:round;
+  transition: stroke-width .3s ease, filter .3s ease, stroke-dashoffset 1.5s cubic-bezier(.65,0,.35,1);
+}
+.metro-line-casing{ stroke: var(--ink); stroke-width:22; }
+.metro-line-stroke{ stroke: var(--c); stroke-width:11; }
+.metro-map.is-focus .metro-line{ opacity:.2; }
+.metro-map.is-focus .metro-line.is-active{ opacity:1; }
+.metro-line.is-active .metro-line-stroke{ stroke-width:15; filter: drop-shadow(0 0 8px var(--c)); }
+.metro-construction{
+  fill:none; stroke: rgba(243,239,224,.3); stroke-width:5; stroke-linecap:round; stroke-dasharray: 1 12;
+}
+
+/* Terminal CHILL&GO: anillos concéntricos que "reciben" las vías */
+.metro-hub{ cursor:pointer; }
+.metro-hub-bg{ fill: var(--ink); }
+.metro-hub-ring{
+  fill:none; stroke-width:2.5;
+  transform-box: fill-box; transform-origin:center;
+  transition: stroke-opacity .35s ease, transform .5s cubic-bezier(.34,1.56,.64,1);
+}
+.metro-hub-ring-0{ stroke: var(--rojo); stroke-opacity:.45; }
+.metro-hub-ring-1{ stroke: var(--paper); stroke-opacity:.3; }
+.metro-hub-ring-2{ stroke: var(--metro-verde); stroke-opacity:.75; }
+.metro-hub image{ transition: filter .35s ease; }
+.metro-hub:hover .metro-hub-ring, .metro-hub:focus-visible .metro-hub-ring{ stroke-opacity:1; }
+.metro-hub:hover .metro-hub-ring-0{ transform: scale(1.015); }
+.metro-hub:hover image{ filter: saturate(1.15) brightness(1.05); }
+.metro-hub-pill rect{ fill: var(--paper); transition: fill .25s ease; }
+.metro-hub-pill text{
+  fill: var(--ink); font-family:'MetroDF','Plus Jakarta Sans',sans-serif;
+  font-size:15px; letter-spacing:.22em; text-transform:uppercase;
+}
+.metro-hub:hover .metro-hub-pill rect, .metro-hub:focus-visible .metro-hub-pill rect{ fill: var(--tacos); }
+
+/* Estaciones */
+.metro-station{ cursor:pointer; outline:none; }
+.metro-hit{ fill:transparent; }
+.metro-stub{ stroke: var(--c); stroke-width:3; stroke-opacity:.5; }
+.metro-tile-inner{
+  transform-box: fill-box; transform-origin:center;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.metro-tile-bg{ fill: var(--c); stroke: var(--ink); stroke-width:3; transition: stroke .25s ease; }
+.metro-label{
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:18px;
+  letter-spacing:.14em; text-transform:uppercase; fill: var(--paper);
+  transition: fill .25s ease, opacity .25s ease;
+}
+.metro-node, .metro-node-xfer, .metro-node-dot{
+  transform-box: fill-box; transform-origin:center;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), fill .3s ease, opacity .3s ease;
+}
+.metro-node{ fill: var(--ink); stroke: var(--c); stroke-width:5; }
+.metro-node-xfer{ fill: var(--paper); stroke: var(--ink); stroke-width:5; }
+.metro-node-dot{ fill: var(--tacos); opacity:0; }
+
+.metro-station:hover .metro-tile-inner,
+.metro-station:focus-visible .metro-tile-inner{ transform: scale(1.14) rotate(-3deg); }
+.metro-station:hover .metro-label,
+.metro-station:focus-visible .metro-label{ fill: var(--tacos); }
+.metro-station:hover .metro-node,
+.metro-station:hover .metro-node-xfer,
+.metro-station:focus-visible .metro-node,
+.metro-station:focus-visible .metro-node-xfer{ transform: scale(1.3); }
+.metro-station:focus-visible .metro-tile-bg{ stroke: var(--electric); stroke-width:4; }
+
+/* Visitadas: el nodo se rellena del color de la línea */
+.metro-station.is-visited .metro-node{ fill: var(--c); }
+.metro-station.is-visited .metro-node-dot{ opacity:1; }
+.metro-station.is-visited .metro-label{ opacity:.6; }
+.metro-station.is-visited:hover .metro-label{ opacity:1; }
+
+/* Llegada del tren */
+.metro-station.is-arriving .metro-node,
+.metro-station.is-arriving .metro-node-xfer{ animation: metro-arrive .5s ease; }
+@keyframes metro-arrive{ 0%{ transform:scale(1.3); } 40%{ transform:scale(1.75); } 100%{ transform:scale(1.3); } }
+
+/* Tren */
+.metro-train{ opacity:0; transition: opacity .4s ease; pointer-events:none; }
+.metro-train.is-on{ opacity:1; }
+.metro-train-body{ fill: var(--tacos); stroke: var(--ink); stroke-width:2.5; }
+.metro-train-window{ fill: var(--paper); opacity:.9; }
+
+/* --- Móvil / tablet: diagramas de recorrido --- */
+.metro-hub-m{
+  position:relative; display:block; width:calc(100% - 12px); max-width:560px; margin:30px auto 0; border-radius:18px;
+  box-shadow:
+    0 0 0 6px var(--ink), 0 0 0 8px var(--metro-verde),
+    0 0 0 14px var(--ink), 0 0 0 16px rgba(243,239,224,.3),
+    0 0 0 22px var(--ink), 0 0 0 24px rgba(216,67,46,.55);
+}
+.metro-hub-m img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:18px; }
+.metro-hub-m-pill{
+  position:absolute; left:50%; bottom:-17px; transform:translateX(-50%);
+  background: var(--paper); color: var(--ink); border-radius:999px; padding:7px 22px;
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.8rem; letter-spacing:.22em; text-transform:uppercase;
+  white-space:nowrap;
+}
+.metro-kicker{
+  margin:52px 0 22px; text-align:center; color: rgba(243,239,224,.55);
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase;
+}
+.metro-strips{ display:grid; gap:30px; }
+@media (min-width:768px){ .metro-strips{ grid-template-columns: repeat(3, 1fr); gap:24px; } }
+
+.metro-strip-head{
+  display:flex; align-items:center; gap:10px; margin-bottom:8px;
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color: rgba(243,239,224,.8);
+}
+.metro-badge{
+  display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+  width:22px; height:22px; border-radius:6px; background: var(--c); color: var(--ci);
+  font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:.72rem; letter-spacing:0;
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+.metro-badge-lg{ width:30px; height:30px; border-radius:8px; font-size:.95rem; }
+
+.metro-strip-track{ position:relative; }
+.metro-strip-track::before{
+  content:''; position:absolute; left:15px; top:14px; bottom:14px; width:8px;
+  background: var(--c); border-radius:4px;
+}
+.metro-strip-track ol{ list-style:none; margin:0; padding:0; }
+.metro-stop{
+  position:relative; display:flex; align-items:center; gap:14px;
+  min-height:60px; padding:6px 10px 6px 0; border-radius:12px;
+  transition: background-color .2s ease;
+}
+.metro-stop:hover, .metro-stop:focus-visible{ background: rgba(243,239,224,.05); }
+.metro-stop-node{
+  position:relative; z-index:1; flex-shrink:0;
+  width:22px; height:22px; margin-left:8px; border-radius:50%;
+  background: var(--ink); border:5px solid var(--c);
+  transition: background-color .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.metro-stop.is-xfer .metro-stop-node{ width:26px; height:26px; margin-left:6px; background: var(--paper); border-color: var(--ink); box-shadow: 0 0 0 2px var(--paper); }
+.metro-stop-tile{
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  width:40px; height:40px; border-radius:10px; background: var(--c);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.metro-stop-tile svg{ width:24px; height:24px; }
+.metro-stop-name{
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase;
+  transition: color .25s ease;
+}
+.metro-stop-xfer{ margin-left:auto; display:flex; gap:4px; }
+.metro-stop:hover .metro-stop-tile, .metro-stop:focus-visible .metro-stop-tile{ transform: scale(1.08) rotate(-3deg); }
+.metro-stop:hover .metro-stop-name, .metro-stop:focus-visible .metro-stop-name{ color: var(--tacos); }
+.metro-stop.is-visited .metro-stop-node{ background: var(--c); }
+.metro-stop.is-xfer.is-visited .metro-stop-node{ background: var(--tacos); }
+.metro-stop.is-visited .metro-stop-name{ color: rgba(243,239,224,.6); }
+.metro-stop.is-arriving .metro-stop-node{ transform: scale(1.35); }
+
+.metro-strip-train{
+  position:absolute; left:19px; top:14px; z-index:2;
+  width:14px; height:28px; border-radius:7px; background: var(--tacos); border:2px solid var(--ink);
+  transform: translate(-50%,-50%); opacity:0; pointer-events:none;
+  transition: top .45s cubic-bezier(.65,0,.35,1), opacity .25s ease;
+}
+.metro-strip-train.is-on{ opacity:1; }
+
+/* --- Leyenda --- */
+.metro-legend{
+  background: rgba(19,19,19,.88);
+  font-family:'MetroDF','Plus Jakarta Sans',sans-serif; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+  color: rgba(243,239,224,.75);
+}
+.metro-legend-item{ display:inline-flex; align-items:center; gap:8px; }
+.metro-sym{ display:inline-block; flex-shrink:0; }
+.metro-sym-xfer{ width:14px; height:14px; border-radius:50%; background: var(--paper); border:3px solid var(--ink); box-shadow: 0 0 0 1.5px var(--paper); }
+.metro-sym-visited{ width:13px; height:13px; border-radius:50%; background: var(--metro-verde); border:3px solid var(--metro-verde); }
+.metro-sym-obra{ width:26px; height:0; border-top:3px dotted rgba(243,239,224,.45); }
+
+@media (prefers-reduced-motion: reduce){
+  .metro-line-casing, .metro-line-stroke, .metro-strip-train{ transition:none !important; }
+}
